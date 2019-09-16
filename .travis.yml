@@ -7,3 +7,6 @@ after_failure:
     - cat /proc/sys/kernel/core_pattern
     - ls -alh
     - ls -alh /var/crash/
+    # http://jsteemann.github.io/blog/2014/10/30/getting-core-dumps-of-failed-travisci-builds/
+    - COREFILE=$(find . -maxdepth 1 -name "core*" | head -n 1) # find core file
+    - if [[ -f "$COREFILE" ]]; then gdb -c "$COREFILE" example -ex "thread apply all bt" -ex "set pagination 0" -batch; fi
