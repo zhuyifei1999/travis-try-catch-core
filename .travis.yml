@@ -1,0 +1,2 @@
+script:
+  - cat /proc/sys/kernel/core_pattern
