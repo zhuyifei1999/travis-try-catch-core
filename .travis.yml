@@ -1,2 +1,9 @@
+language: python
 script:
-  - cat /proc/sys/kernel/core_pattern
+    - gcc -o segfault segfault.c
+    - ulimit -c unlimited
+    - ./segfault
+after_failure:
+    - cat /proc/sys/kernel/core_pattern
+    - ls -alh
+    - ls -alh /var/crash/
